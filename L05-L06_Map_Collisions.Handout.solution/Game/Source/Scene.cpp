@@ -65,7 +65,7 @@ bool Scene::PreUpdate()
 bool Scene::Update(float dt)
 {
 	
-	app->frame_cap = 65; //Fix frames to 60 average;
+	app->frame_cap = 68; //Fix frames to 60 average;
 
 	app->capped_ms = 1000 / app->frame_cap;
 	// Save/Load
