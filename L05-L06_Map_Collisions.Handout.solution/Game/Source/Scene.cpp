@@ -6,6 +6,8 @@
 #include "Window.h"
 #include "Scene.h"
 #include "Map.h"
+#include "Timer.h"
+#include"PerfTimer.h"
 
 
 #include "Defs.h"
@@ -63,6 +65,9 @@ bool Scene::PreUpdate()
 bool Scene::Update(float dt)
 {
 	
+	app->frame_cap = 65; //Fix frames to 60 average;
+
+	app->capped_ms = 1000 / app->frame_cap;
 	// Save/Load
 	if (app->input->GetKey(SDL_SCANCODE_F6) == KEY_DOWN)
 		app->LoadGameRequest();

@@ -34,7 +34,7 @@ int main(int argc, char* args[])
 
 	while(state != EXIT)
 	{
-		const int FPS = 60;
+		/*const int FPS = 60;
 		const int frameDelay = 1000 / FPS;
 
 		Uint32 frameStart;
@@ -45,7 +45,7 @@ int main(int argc, char* args[])
 
 		if (frameDelay > frameTime) {
 			SDL_Delay(frameDelay - frameTime);
-		}
+		}*/
 		switch(state)
 		{
 			// Allocate the engine --------------------------------------------

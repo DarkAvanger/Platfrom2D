@@ -1,7 +1,7 @@
 <!-- Config file for the game -->
 <!-- L01: DONE 1: Create configuration file-->
 <config>
-  <app>
+  <app framerate_cap="60">
     <title>Game Development Testbed</title>
     <organization>UPC</organization>
   </app>
@@ -18,8 +18,15 @@
     <fullscreen_window value="false"/>
   </window>
 
+  <file_system>
+    <path>data.zip</path>
+  </file_system>
+
   <!-- L03: Added maps folder as config option -->
   <map>
     <folder>Assets/maps/</folder>
   </map>
+
+<music intro1="audio\music\Intro.ogg" intro2="audio\music\Intro2.ogg" level="audio\music\stage_music.ogg"/>
+
 </config>

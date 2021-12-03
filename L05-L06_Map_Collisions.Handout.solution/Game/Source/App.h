@@ -4,6 +4,9 @@
 #include "Module.h"
 #include "List.h"
 
+#include "PerfTimer.h"
+#include "Timer.h"
+
 #include "PugiXml/src/pugixml.hpp"
 
 #define CONFIG_FILENAME		"config.xml"
@@ -48,12 +51,16 @@ public:
 	const char* GetArgv(int index) const;
 	const char* GetTitle() const;
 	const char* GetOrganization() const;
+	float GetDT() const;
 
     // L02: DONE 1: Create methods to request Load / Save
 	void LoadGameRequest();
 	void SaveGameRequest() const;
 
-private:
+	//bool using_VSYNC = false;
+
+
+public:
 
 	// Load config file
 	// NOTE: It receives config document
@@ -78,6 +85,11 @@ private:
 	bool LoadGame();
 	bool SaveGame() const;
 
+	bool cap = true;
+	bool using_VSYNC = false;
+	uint32 frame_cap;
+	uint32				capped_ms;
+
 public:
 
 	// Modules
@@ -89,7 +101,7 @@ public:
 	Scene* scene;
 	Map* map;
 
-private:
+public:
 
 	int argc;
 	char** args;
@@ -104,11 +116,24 @@ private:
 	//pugi::xml_node config;
 	//pugi::xml_node configApp;
 
-	uint frames;
+	//uint frames;
 	float dt;
 
 	mutable bool saveGameRequested;
 	bool loadGameRequested;
+
+	PerfTimer			ptimer;
+
+	Timer				startup_time;
+	Timer				frame_time;
+	Timer				last_sec_frame_time;
+
+	uint64				frame_count = 0;
+	uint32				last_sec_frame_count = 0;
+	uint32				prev_last_sec_frame_count = 0;
+
+
+	//float				dt = 0.0f;
 };
 
 extern App* app;

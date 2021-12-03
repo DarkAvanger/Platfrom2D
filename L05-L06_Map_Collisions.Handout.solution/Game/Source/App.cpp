@@ -6,6 +6,7 @@
 #include "Audio.h"
 #include "Scene.h"
 #include "Map.h"
+#include "List.h"
 
 
 #include "Defs.h"
@@ -17,7 +18,7 @@
 // Constructor
 App::App(int argc, char* args[]) : argc(argc), args(args)
 {
-	frames = 0;
+	//frames = 0;
 
 	win = new Window();
 	input = new Input();
@@ -81,6 +82,10 @@ bool App::Awake()
 		// L01: DONE 4: Read the title from the config file
 		title.Create(configApp.child("title").child_value());
 		organization.Create(configApp.child("organization").child_value());
+		frame_cap = configApp.attribute("framerate_cap").as_uint();
+
+		if (frame_cap > 0)
+			capped_ms = 1000 / frame_cap;
 	}
 
 	if (ret == true)
@@ -157,6 +162,11 @@ pugi::xml_node App::LoadConfig(pugi::xml_document& configFile) const
 // ---------------------------------------------
 void App::PrepareUpdate()
 {
+	frame_count++;
+	last_sec_frame_count++;
+
+	dt = frame_time.ReadSec();
+	frame_time.Start();
 }
 
 // ---------------------------------------------
@@ -165,6 +175,43 @@ void App::FinishUpdate()
 	// L02: DONE 1: This is a good place to call Load / Save methods
 	if (loadGameRequested == true) LoadGame();
 	if (saveGameRequested == true) SaveGame();
+
+	// Framerate 
+	if (last_sec_frame_time.Read() > 1000)
+	{
+		last_sec_frame_time.Start();
+		prev_last_sec_frame_count = last_sec_frame_count;
+		last_sec_frame_count = 0;
+	}
+
+	float avg_fps = float(frame_count) / startup_time.ReadSec();
+	float seconds_since_startup = startup_time.ReadSec();
+	uint32 last_frame_ms = frame_time.ReadSec();
+	uint32 frames_on_last_update = prev_last_sec_frame_count;
+
+	static char title[256];
+
+	char *vsync_;
+	char *cap_string;
+
+	if (using_VSYNC)
+		vsync_ = "ON";
+	else
+		vsync_ = "OFF";
+
+	if (cap)
+		cap_string = "ON";
+	else
+		cap_string = "OFF";
+	
+
+	sprintf_s(title, 256, "Unknown dt: %.3f || Last sec frames: %i   Av.FPS: %.2f   Last Frame Ms: %02u || VSYNC: %s   Framerate Cap: %s ", dt,
+		frames_on_last_update, avg_fps, last_frame_ms, vsync_, cap_string);
+
+	app->win->SetTitle(title);
+
+	if (last_frame_ms < capped_ms)
+		SDL_Delay(capped_ms - last_frame_ms);
 }
 
 // Call modules before each loop iteration
@@ -263,10 +310,16 @@ const char* App::GetArgv(int index) const
 		return NULL;
 }
 
+float App::GetDT() const {
+
+	return dt;
+}
+
 // ---------------------------------------
 const char* App::GetTitle() const
 {
 	return title.GetString();
+	
 }
 
 // ---------------------------------------

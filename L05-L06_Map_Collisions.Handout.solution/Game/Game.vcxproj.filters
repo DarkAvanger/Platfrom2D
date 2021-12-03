@@ -37,6 +37,12 @@
     <ClCompile Include="Source\Window.cpp">
       <Filter>C++</Filter>
     </ClCompile>
+    <ClCompile Include="Source\Timer.cpp">
+      <Filter>C++</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\PerfTimer.cpp">
+      <Filter>C++</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Source\Defs.h">
@@ -91,6 +97,12 @@
       <Filter>Headers</Filter>
     </ClInclude>
     <ClInclude Include="Source\Window.h">
+      <Filter>Headers</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\PerfTimer.h">
+      <Filter>Headers</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\Timer.h">
       <Filter>Headers</Filter>
     </ClInclude>
   </ItemGroup>
