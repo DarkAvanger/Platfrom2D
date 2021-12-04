@@ -34,6 +34,8 @@ bool Scene::Awake()
 // Called before the first frame
 bool Scene::Start()
 {
+	pugi::xml_document configFile;
+	pugi::xml_node PlayerSettings;
 	// L03: DONE: Load map
 	//app->map->Load("hello.tmx");
 	app->map->Load("level_01.tmx");
@@ -41,6 +43,9 @@ bool Scene::Start()
 	// Sprites
 	/*BG1 = app->tex->Load("Assets/.png");*/
 	Owlet = app->tex->Load("Assets\\maps\\Owlet.png");
+
+	pugi::xml_parse_result result = configFile.load_file("PlayerSettings.xml");
+	PlayerSettings = configFile.child("config");
 	
 	// Load music
 	app->render->camera.x = 0; //Need Position

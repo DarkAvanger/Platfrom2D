@@ -134,6 +134,11 @@ public:
 
 
 	//float				dt = 0.0f;
+
+	pugi::xml_document configFile;
+	pugi::xml_node config;
+	pugi::xml_node configApp;
+	pugi::xml_node		PlayerSettings;
 };
 
 extern App* app;

@@ -65,10 +65,6 @@ void App::AddModule(Module* module)
 // Called before render is available
 bool App::Awake()
 {
-	pugi::xml_document configFile;
-	pugi::xml_node config;
-	pugi::xml_node configApp;
-
 	bool ret = false;
 
 	// L01: DONE 3: Load config from XML
