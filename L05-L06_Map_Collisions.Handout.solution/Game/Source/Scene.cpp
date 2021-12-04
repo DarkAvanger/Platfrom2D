@@ -232,7 +232,7 @@ bool Scene::Update(float dt)
 		app->map->mapData.tileWidth, app->map->mapData.tileHeight,
 		app->map->mapData.tilesets.count());
 
-	app->win->SetTitle(title.GetString());
+	//app->win->SetTitle(title.GetString());
 	return true;
 }
 
