@@ -1,0 +1,43 @@
+<!-- Config file for Player-->
+<config>
+
+    <image source="Owlet.png" width="283" height="283" w="40" h="40" />
+
+
+  <PlayerSettings>
+    
+    <StartingPose>
+      <Level1 position.x="580" position.y="1400" />
+    </StartingPose>
+    <Life life="70"/>
+    <Velocity velocity.x="6" velocity.y="7"/>
+    <MaxVelocity velocity.x="7" velocity.y="8"/>
+    <Acceleration a.x="0.0" a.y="0.2"/>
+    
+  </PlayerSettings>
+
+<!--ANIMATIONS-->
+  <AnimationCoords>
+
+    <Idle loop="true" speed="0.17">
+      
+    </Idle>
+
+    <Run loop="true" speed="0.15">
+      
+    </Run>
+
+    <Jump loop="false" speed="0.15">
+   
+    </Jump>
+   
+    <Fall loop="true" speed="0.15">
+     
+    </Fall>
+	
+    <Dead loop="false" speed="0.15">
+      
+    </Dead>
+
+  </AnimationCoords>
+</config>
